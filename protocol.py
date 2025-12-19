@@ -1,5 +1,6 @@
 HEADER_SIZE = 64
 import json
+import os
 def get_info(socket, size:int):
     left_to_get = size
     information = b""
@@ -23,6 +24,7 @@ def recv(socket):
     if data_type == "TXT" or data_type == "ERR" or data_type == "DIC":
         return [data_type, information.decode()]
     else:
+        os.makedirs("recv_files", exist_ok=True)
         file = open(f"recv_files/{file_name}", "wb")
         file.write(information)
         file.close()
